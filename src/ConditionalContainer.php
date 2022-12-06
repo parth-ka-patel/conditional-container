@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use JsonSerializable;
 use Laravel\Nova\Contracts\RelatableField;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Fields\File;
@@ -15,7 +16,7 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Resource;
 use logipar\Logipar;
 
-class ConditionalContainer extends Field
+class ConditionalContainer extends Field implements JsonSerializable
 {
     /**
      * The field's component.
@@ -371,7 +372,7 @@ class ConditionalContainer extends Field
 
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return array_merge([
             'fields' => $this->fields,
